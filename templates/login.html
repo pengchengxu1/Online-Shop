@@ -1,0 +1,63 @@
+{% block content %}
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login_btn.css' %}">
+    <style type="text/css">
+        iframe#_hjRemoteVarsFrame {
+            display: none !important;
+            width: 1px !important;
+            height: 1px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+    </style>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="_33T1-ZBLz7FQrNT-ZCfKte">
+            <div class="_1sxlTjCjFLM5k-nXvLkywP">
+
+                <section class="_3P7ejYsij9dpnS4OZiCJVK">
+                    {% if messages %}
+                    <script>
+                        {% for msg in messages %}
+                        alert('{{ msg.message }}');
+                        {% endfor %}
+                    </script>
+                    {% endif %}
+                    <div class="_2CKN4I1T1m1ACp1JPZ2CR9"><h1>Login</h1>
+                        <form class="ui error form">
+                            <div class="field"><label>UserName</label><br><br>
+                                <div class="ui input"><input name="username" autocomplete="username"
+                                                             value="" style="width:331px">
+                                </div>
+                                <br>
+                            </div>
+                            <br>
+                            <div class="field"><label>Password</label><br><br>
+                                <div class="ui input"><input name="password" autocomplete="current-password"
+                                                             type="password"
+                                                             value="" style="width:331px"></div>
+                            </div>
+                            <br>
+
+                            <div class="ui hidden divider"></div>
+                            <button type="submit" class="ui large circular fluid primary button">Login</button>
+                        </form>
+                        <div>
+                            <div class="_1TIOxpSJZ9E3EmrUCPh1rq">
+                                <div class="_1shxn-I3ZrsxJkRub33ZoZ">
+                                    <div class="_34wD3pxeKAiDFX3oCDQ0V2"></div>
+                                </div>
+                                <div class="_32kDtyuRtVMAzp7wf6Xfyv"></div>
+                            </div>
+                        </div>
+                        <div class="_2c-xSUqb6VJ6HJUQ_o-qV9">no account?&nbsp;<a
+                                href="{% url 'register' %}">go register</a></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </form>
+{% endblock %}

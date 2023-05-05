@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/foot.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/order.css">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+
+</head>
+<body>
+<div class="header_con">
+    <div class="header">
+        <div class="welcome fl">Welcome to the Mall</div>
+        <div class="fr">
+            <div class="login_btn fl">
+                {% if userinfo.islogin %}
+                Welcome：<em>{{ userinfo.username }}</em>
+                <span>|</span>
+                <a href="{% url 'logout' %}">logout</a>
+                {% else %}
+                <a href="{% url 'login' %}">login</a>
+                <span>|</span>
+                <a href="{% url 'register' %}">register</a>
+                {% endif %}
+            </div>
+            <div class="user_link fl">
+                <span>|</span>
+                <a href="{% url 'index' %}">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="list_model">
+    <div class="list_title clearfix">
+        <h3 class="fl" id="model01">Order list</h3>
+        <div class="subtitle fl">
+            <span>|</span>
+        </div>
+    </div>
+    {%if not orders%}
+    <h1 style="color:red;font-size:20px">You have no orders yet</h1>
+    {%endif%}
+    <table class="td-void order-tb">
+        <colgroup>
+            <col class="number-col">
+            <col class="consignee-col">
+            <col class="amount-col">
+            <col class="status-col">
+        </colgroup>
+        {% for order in orders%}
+        <tbody id="parent-267446930650">
+        <tr class="sep-row">
+            <td colspan="4"></td>
+        </tr>
+        <tr class="tr-th tr-th-split">
+            <td colspan="4">
+                <div class="split-row split-row02">
+                    <span class="gap"></span>
+
+                    <span class="order-count">Amount：<em>¥{{order.total_price}}</em></span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+        <tbody id="tb-267459576048" class="split-tbody parent-267446930650">
+
+        <tr class="tr-th tr-th-02">
+            <td colspan="4">
+                <span class="gap"></span>
+                <span class="dealtime" title="order.create_time">{{order.create_time}}</span>
+                <input type="hidden" id="datasubmit-267459576048" value="2023-04-24 08:07:20">
+
+                <span class="number">
+               		                        order order_num：
+                                <a name="orderIdLinks" id="idUrl267459576048" target="_blank"
+                                   clstag="click|keycount|orderinfo|order_num">{{order.order_num}}</a>
+
+
+
+                                        </span>
+
+            </td>
+        </tr>
+
+
+        <tr class="tr-bd" id="track267459576048" oty="22,4,70" cxl="0">
+            <td>
+                <div class="goods-item p-10058922913344">
+                    <div class="p-img">
+                        <a href="#" clstag="click|keycount|orderinfo|order_product"
+                           target="_blank">
+                            <img class=""
+                                 src="/static/{{ order.image }}"
+                                 data-lazy-img="done" width="60" height="60">
+                        </a>
+                    </div>
+                    <div class="p-msg">
+                        <div class="p-name">
+                            <a href="//item.jd.com/10058922913344.html" class="a-link"
+                               clstag="click|keycount|orderinfo|order_product" target="_blank"
+                               >{{order.title}}</a>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="goods-number">
+                    x1
+                </div>
+
+
+                <div class="goods-repair">
+                    {% if order.status == 'ordered' %}
+                    <a href="/cancellation?id={{order.id}}" target="_blank"
+                       clstag="click|keycount|orderinfo|order_repair">
+                        cancellation of order
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="clr"></div>
+            </td>
+
+            <td rowspan="1">
+                <div class="consignee tooltip">
+                    <span class="txt">{{order.user.user_name}}</span>
+                </div>
+            </td>
+            <td rowspan="1">
+                <div class="amount">
+                    <span>¥{{order.total_price}}</span> <br>
+                </div>
+            </td>
+            <td rowspan="1">
+                <div class="status">
+                    <span class="order-status ftx-03">
+
+            	{{order.status}}
+
+                                        </span>
+                    <br>
+
+                </div>
+            </td>
+        </tr>
+
+
+        </tbody>
+        {%endfor%}
+
+    </table>
+
+
+</div>
+
+<div class="footer_nav_box">
+    <div class="footer_nav">
+
+    </div>
+    <div class="footer_copyright">
+        <span>Copyright (C) 2022-2023, All Rights Reserved</span>
+    </div>
+</div>
+</body>
+</html>
